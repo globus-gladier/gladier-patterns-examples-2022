@@ -12,6 +12,15 @@ We also provide below information on how to set up to run these applications
 
 Although each application has its own particular set of tools, they all share common patterns and leverage the same services. Initial setup can be installed follow the PAPER-HOW-TO.md manual.
 
+## Requirements
+
+For these examples, A "compute" machine is needed to stand in as the HPC environment, where data will be transfered and processed. It does not need to be powerful, but we do recommend linux (preferably Ubuntu)
+and Conda (for python). A Globus collection is also required (Globus Connect Personal is recommended)
+
+* Linux (Ubuntu works best)
+* [Anaconda](https://www.anaconda.com/products/distribution#Downloads)
+* [Globus Connnect Personal](https://docs.globus.org/how-to/globus-connect-personal-linux/)
+
 ## Test Data
 
 To facilitate experimentation, we make test data available for the XPCS, SSX, and Ptychography applications at this [Globus endpoint](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F).
@@ -22,6 +31,12 @@ The five applications each run their computational steps on a high-performance c
 
 For these examples, A "compute" machine is needed to stand in as the HPC environment, where data will be transfered and processed. It does not need to be powerful, but we do recommend Linux (preferably Ubuntu)
 and Conda (for python). A Globus collection is also required (Globus Connect Personal is recommended)
+By default, test data is pulled from the [Gladier Demo Collection](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F). Data is available for
+XPCS, SSX, and ptychography.
+
+## FuncX Endpoint Setup
+
+FuncX endpoints support long lived python processes for queueing work on your compute machine. It can be installed from PyPi under the name `funcx-endpoint`.
 
 **Note**: There are current issues using Macs as FuncX Endpoints. We highly recommend using Linux instead.
 
