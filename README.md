@@ -19,38 +19,37 @@ We describe in the following how to realize the common pattern using your own co
 
 ### Synopsis of the infrastructure services needed to realize the common pattern
 
-The common patternr requires that three distinct endpoints be running:
+The common pattern requires that three distinct endpoints be running:
 
-* On the **instrument**, a first Globus Connect endpoint (or "Collection" in Globus parlance), which we refer to here as *instrument-transfer*, so that files can be transferred *from* the instrumentl
+* On the **instrument**, a first Globus Connect endpoint (or "Collection" in Globus parlance), which we refer to here as *instrument-transfer*, so that files can be transferred *from* the instrument.
 * On the **analysis computer**, a second Globus Connect endpoint (*analysis-transfer*), so that files can be transferred *to* the analysis computer, plus a funcX endpoint (*analysis-compute*), so that tasks can be sent to the analysis computer for execution. 
 
 ### Configuring the instrument
 
 In a real deployment, the *instrument-transfer* endpoint will typically be a Globus Connect service running on a storage system at the instrument where data are being produced.
 
-To facilitate experimentation, we make test data available for the XPCS, SSX, and Ptychography applications at this [Globus endpoint](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F). 
+To facilitate experimentation, we make test data available for the XPCS, SSX, BraggNN, and Ptychography applications at this [Globus endpoint](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F). 
 
 ### Configuring the analysis computer 
 
-In a real deployment, the **analysis computer** will typically be a high-performance computing (HPC) systen that is likely to have Globus Connect and funcX endpoints deployed. 
+In a real deployment, the **analysis computer** will typically be a high-performance computing (HPC) system that is likely to have Globus Connect and funcX endpoints deployed. 
 
-When experimenting, you may instead want to use a PC or laptop, in which case you will need to install the Globus Connect and funcX agent software on that machine, which will have the following software installed:
-
-1. Install some basic software on your computer
-  * XX
-  * XX
-1. Install Globus Connect Personal 
-1. Install funcX 
-
-* Preferably Linux (Ubuntu works best)
-* [Anaconda](https://www.anaconda.com/products/distribution#Downloads)
-* [Globus Connnect Personal](https://docs.globus.org/how-to/globus-connect-personal-linux/)
-
-You will also want 
-
-A FuncX endpoint is a long-lived Python process for queuing and running work on your compute machine. It can be installed from PyPi under the name `funcx-endpoint`.
+When experimenting, you may instead want to use a PC or laptop, in which case you will need to install the Globus Connect and funcX agent software on that machine.
 
 **Note**: There are currently issues using Macs as FuncX Endpoints when using Python 3.8 or later. We highly recommend using Linux instead.
+
+1. Install some basic software on your computer
+  * [Anaconda](https://www.anaconda.com/products/distribution#Downloads)
+2. Install Globus Connect Personal 
+3. Install funcX 
+
+#### Configuring Globus
+
+To retrieve example datasets you will need a Globus endpoint on your **analyis computer**. Instructions to this are available for [Globus Connnect Personal](https://docs.globus.org/how-to/globus-connect-personal-linux/).
+
+#### Configuring funcX
+
+A FuncX endpoint is a long-lived Python process for queuing and running work on your compute machine. It can be installed from PyPi under the name `funcx-endpoint`. Once installed, an endpoint can be deployed using the following commands.
 
 ```bash
 
@@ -79,20 +78,15 @@ funcx-endpoint list
 ```
 
 
-## Configuring the Gladier client application
+## Configuring the Gladier client applications
 
 Before running each application, you will need to configure its Gladier script with identifiers for the three endpoints just listed.
 
-
-Gladier is used for registering FuncX functions and deploying flows. Below are steps to
-set up funcX endpoints and a Globus Collection. After this, running the test client below
-will be possible. The test client, unlike the scientific tools, requires no additional external dependencies.
-
+The test client, unlike the scientific tools, requires no additional external dependencies.
 You will need to edit the `test_client.py` script to include your
-FuncX endpoints, along with a Globus Collection. Note: Your
-FuncX endpoints _must_ have access to the Globus Collection that you use.
+FuncX endpoints, along with a Globus Collection. 
 
-You may install these in a separate Python environment or on a separate machine
+You may install and run the Gladier scripts in a separate Python environment or on a separate machine
 if you wish:
 
 ```
@@ -123,7 +117,7 @@ Output: [0, 'Success! You environment has been setup correctly!\n', '']
 
 Now you're ready to run the other science flows.
 
-## Ptychography
+### Ptychography
 
 The ptychography flow uses a shell command tool to execute the `ptychodus` tool on the example data.
 
@@ -145,14 +139,14 @@ pip install -e .
 ```
 
 Before you run `ptychodus_client.py`, remember to restart your FuncX compute endpoint and set
-the values in the script below.
+the values in the script.
 
 ```bash
 
 python ptychodus_client.py --datadir <data path>
 ```
 
-## XPCS flow
+### XPCS flow
 
 The XPCS flow uses the boost_corr Python SDK for execution, and requires the following dependencies
 for its compute endpoint:
