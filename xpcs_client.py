@@ -30,7 +30,7 @@ def arg_parse():
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main():
     args = arg_parse()
 
     sample_name = args.samplename
@@ -40,7 +40,6 @@ if __name__ == "__main__":
     raw_name = "A001_Aerogel_1mm_att6_Lq0_001_00001-01000.imm"
     hdf_name = "A001_Aerogel_1mm_att6_Lq0_001_0001-1000.hdf"
     qmap_name = "comm201901_qmap_aerogel_Lq0.h5"
-    dataset_name = hdf_name[: hdf_name.rindex(".")]  # remove file extension
 
     dataset_dir = data_dir
 
@@ -56,6 +55,24 @@ if __name__ == "__main__":
     # This tells the corr state where to place version specific info
     execution_metadata_file = os.path.join(dataset_dir, "execution_metadata.json")
 
+    # TODO: Set the following values for your environment
+
+    # Your Globus Transfer endpoint UUID where data processing will be done
+    # destination_endpoint_id = "<UUID Value>"
+
+    # Your FuncX endpoint UUID where the processing function can run. It must be
+    # able to access the data as stored on the Globus Transfer endpoint set by
+    # destination_endpoint_id
+    # funcx_endpoint_compute = "<UUID Value>"
+
+    # Your FuncX endpoint UUID where the non-compute intensive processing will
+    # run. It also must be able to access the data as stored on the Globus
+    # Transfer endpoint set by destination_endpoint_id
+    # funcx_endpoint_non_compute = "<UUID Value>"
+
+
+
+
     flow_input = {
         "input": {
             # processing variables
@@ -65,16 +82,14 @@ if __name__ == "__main__":
             # REMOTE DEMO ENDPOINT FOR PTYCHO DATA
             "from_storage_transfer_source_endpoint_id": "a17d7fac-ce06-4ede-8318-ad8dc98edd69",
             "from_storage_transfer_source_path": "/XPCS/A001_Aerogel_1mm_att6_Lq0_001_0001-1000/",
-            # TODO: Uncomment and add your Globus Collection here
-            # "from_storage_transfer_destination_endpoint_id": "",
+            "from_storage_transfer_destination_endpoint_id": destination_endpoint_id,
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
             "metadata_file": input_hdf_file,
             "hdf_file": output_hdf_file,
             "execution_metadata_file": execution_metadata_file,
-            # TODO: Uncomment and add your funcX endpoints here
-            # "funcx_endpoint_non_compute": "",
-            # "funcx_endpoint_compute": "",
+            "funcx_endpoint_non_compute": funcx_endpoint_non_compute,
+            "funcx_endpoint_compute": funcx_endpoint_compute,
             "boost_corr": {
                 "atype": "TwoTime",
                 "qmap": qmap_file,
@@ -103,3 +118,7 @@ if __name__ == "__main__":
         f"Run started, you can also track the progress at: \n"
         f"https://app.globus.org/runs/{run['run_id']}"
     )
+
+
+if __name__ == "__main__":
+    main()
