@@ -2,11 +2,11 @@
 
 The paper **Linking Scientific Instruments and Computation** describes five example Gladier applications. We provide code pointers and information on how to run each application at the following links:
 
-* [XPCS](https://github.com/globus-gladier/gladier-client-template/blob/main/paper_demo/xpcs_client.py): X-ray Photon Correlation Spectroscopy application.
+* [XPCS](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/xpcs_client.py): X-ray Photon Correlation Spectroscopy application.
 * [SSX](): Serial Synchrotron Crystallography application 
 * [HEDM](): High-energy Diffraction Microscopy
 * [BRAGGNN](): Bragg
-* [PTYCHOGRAPHY](): Ptychography application.
+* [PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/ptychodus_client.py): Ptychography application.
 
 We also provide below information on how to set up to run these applications 
 
