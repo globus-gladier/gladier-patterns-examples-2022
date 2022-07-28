@@ -13,7 +13,11 @@ We also provide below information on how to set up to run these applications.
 
 ## The common pattern implemented by all five applications
 
-Although each of the five applications has its own particular set of tools, they all implement a common pattern, in which the Gladier application (the **client**) first makes a `Transfer` request to transfer data from an **instrument** to an **analysis computer**, and then makes one or more `Compute` requests to the analysis computer to analyze the data. Of course, many Gladier applications (including the production applications described in the paper) are more complex than that, but this pattern captures important concepts.
+Although each of the five applications has its own particular set of tools, they all implement a common pattern, shown in the following figure, in which the a Gladier application (the **client**), running somewhere, makes a `Transfer` request to transfer data from an **instrument computer** to an **analysis computer** and then makes one or more `Compute` requests to the analysis computer to manipulate the data.
+
+<img src=Fig4Web.jpg width=800>
+
+Of course, many Gladier applications (including the production applications described in the paper) are more complex than that, but this pattern captures important concepts.
 
 We describe in the following how to realize the common pattern using your own computer as the analysis computer.
 
@@ -22,13 +26,17 @@ We describe in the following how to realize the common pattern using your own co
 The common pattern requires that three distinct endpoints be running:
 
 * On the **instrument**, a first Globus Connect endpoint (or "Collection" in Globus parlance), which we refer to here as *instrument-transfer*, so that files can be transferred *from* the instrument.
-* On the **analysis computer**, a second Globus Connect endpoint (*analysis-transfer*), so that files can be transferred *to* the analysis computer, plus a funcX endpoint (*analysis-compute*), so that tasks can be sent to the analysis computer for execution. 
+* On the **analysis computer**, a second Globus Connect endpoint (*analysis-transfer*), so that files can be transferred *to* the analysis computer.
+* Also on the  **analysis computer**, a funcX endpoint (*analysis-compute*), so that tasks can be sent to the analysis computer for execution. 
 
-### Configuring the instrument
+The client application is configured with the addresses of these three endpoints, as we describe below.
+
+### Configuring the instrument computer
 
 In a real deployment, the *instrument-transfer* endpoint will typically be a Globus Connect service running on a storage system at the instrument where data are being produced.
 
-To facilitate experimentation, we make test data available for the XPCS, SSX, BraggNN, and Ptychography applications at this [Globus endpoint](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F). 
+To facilitate experimentation, we make test data available for the XPCS, SSX, BraggNN, and Ptychography applications at this [Globus endpoint](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F). Thus there is nothing for you to do to configure the instrument computer.
+
 
 ### Configuring the analysis computer 
 
@@ -36,20 +44,14 @@ In a real deployment, the **analysis computer** will typically be a high-perform
 
 When experimenting, you may instead want to use a PC or laptop, in which case you will need to install the Globus Connect and funcX agent software on that machine.
 
-**Note**: There are currently issues using Macs as FuncX Endpoints when using Python 3.8 or later. We highly recommend using Linux instead.
+**Note**: There are currently issues using Macs as FuncX Endpoints when using Python 3.8 or later. We recommend using Linux instead.
 
 1. Install some basic software on your computer
-  * [Anaconda](https://www.anaconda.com/products/distribution#Downloads)
+  * Install [Anaconda](https://www.anaconda.com/products/distribution#Downloads), which we will use to install other software.
 2. Install Globus Connect Personal 
-3. Install funcX 
-
-#### Configuring Globus
-
-To retrieve example datasets you will need a Globus endpoint on your **analyis computer**. Instructions to this are available for [Globus Connnect Personal](https://docs.globus.org/how-to/globus-connect-personal-linux/).
-
-#### Configuring funcX
-
-A FuncX endpoint is a long-lived Python process for queuing and running work on your compute machine. It can be installed from PyPi under the name `funcx-endpoint`. Once installed, an endpoint can be deployed using the following commands.
+  * To retrieve example datasets you will need a Globus endpoint on your **analyis computer**. Instructions to this are available for [Globus Connnect Personal](https://docs.globus.org/how-to/globus-connect-personal-linux/).
+3. Install funcX endpoint software
+  * A FuncX endpoint is a long-lived Python process for queuing and running work on your compute machine. It can be installed from PyPi under the name `funcx-endpoint`. Once installed, an endpoint can be deployed using the following commands.
 
 ```bash
 
@@ -57,7 +59,6 @@ A FuncX endpoint is a long-lived Python process for queuing and running work on 
 conda create -n gladier_demo_remote python=3.9
 conda activate gladier_demo_remote
 pip install funcx-endpoint
-
 
 # Set up your FuncX "compute" endpoint
 # Use the generated UUID for "funcx_endpoint_compute" states
