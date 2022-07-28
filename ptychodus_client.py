@@ -11,14 +11,7 @@ from gladier import GladierBaseClient, generate_flow_definition
 from tools.ptychodus_plot import PtychodusPlot
 
 
-@generate_flow_definition(
-    modifiers={
-        "publish_gather_metadata": {
-            "WaitTime": 240,
-            "payload": "$.PtychodusPlot.details.result[0].pilot",
-        },
-    }
-)
+@generate_flow_definition
 class PtychodusFlow(GladierBaseClient):
     gladier_tools = [
         "gladier_tools.globus.transfer.Transfer:FromStorage",
