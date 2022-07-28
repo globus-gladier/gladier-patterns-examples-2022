@@ -13,7 +13,8 @@ from gladier import GladierBaseClient, generate_flow_definition
 class SSXFlow(GladierBaseClient):
     gladier_tools = [
         "gladier_tools.globus.transfer.Transfer:FromStorage",
-        "gladier_tools.posix.shell_cmd.ShellCmdTool",
+        "gladier_tools.posix.shell_cmd.ShellCmdTool:Stills",
+        "gladier_tools.posix.shell_cmd.ShellCmdTool:PlotHist",
     ]
 
 
@@ -49,9 +50,13 @@ if __name__ == "__main__":
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
             # shell cmd inputs
-            "args": f"",
-            "cwd": f"{data_dir}",
-            "timeout": 180,
+            "stills_args": f"",
+            "stills_cwd": f"{data_dir}",
+            "stills_timeout": 180,
+            # shell cmd inputs
+            "plot_hist_args": f"",
+            "plot_hist_cwd": f"{data_dir}",
+            "plot_hist_timeout": 180,
             # TODO: Uncomment and add your funcX endpoints here
             # "funcx_endpoint_non_compute": "",
             # "funcx_endpoint_compute": "",

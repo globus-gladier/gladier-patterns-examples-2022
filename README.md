@@ -8,7 +8,7 @@ The paper **Linking Scientific Instruments and Computation** describes five exam
 * [BRAGGNN](): Bragg
 * [PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/ptychodus_client.py): Ptychography application.
 
-We also provide below information on how to set up to run these applications 
+We also provide below information on how to set up to run these applications.
 
 Although each application has its own particular set of tools, they all share common patterns and leverage the same services. Initial setup can be installed follow the PAPER-HOW-TO.md manual.
 
