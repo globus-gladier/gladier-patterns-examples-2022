@@ -35,6 +35,10 @@ if __name__ == "__main__":
     data_dir = os.path.join(args.datadir, sample_name)
     run_label = "DEMO SSX: " + sample_name
 
+    # TODO: Uncomment and add your dials installation here
+    # dials_path = ''
+
+
     # Base input for the flow
     flow_input = {
         "input": {
@@ -51,7 +55,7 @@ if __name__ == "__main__":
             "from_storage_transfer_recursive": True,
             # shell cmd inputs
             "stills_args": f"",
-            "stills_cwd": f"{data_dir}",
+            "stills_cwd": f"source {dials_path}/dials && dials.stills_process {phil_name} {data_dir} > {logname}.txt",
             "stills_timeout": 180,
             # shell cmd inputs
             "plot_hist_args": f"",

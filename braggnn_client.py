@@ -35,6 +35,9 @@ if __name__ == "__main__":
     data_dir = os.path.join(args.datadir, sample_name)
     run_label = "BraggNN DEMO: " + sample_name
 
+    # TODO: Uncomment and add your funcX endpoints here
+    # braggnn_dir=''
+
     # Base input for the flow
     flow_input = {
         "input": {
@@ -50,7 +53,7 @@ if __name__ == "__main__":
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
             # shell cmd inputs
-            "args": f"",
+            "args": f"python {braggnn_dir}/main.py -expName={sample_name} -maxep=20 -psz=11",
             "cwd": f"{data_dir}",
             "timeout": 180,
             # TODO: Uncomment and add your funcX endpoints here

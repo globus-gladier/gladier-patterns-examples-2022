@@ -166,3 +166,43 @@ Remember to restart your compute endpoint and add the values to the `xpcs_client
 
 python xpcs_client.py --datadir <data path>
 ```
+
+
+### SSX flow
+
+The SSX flow uses the [DIALS Package][https://dials.github.io/], and requires the following dependencies
+for its compute endpoint:
+
+```bash
+
+#SSX flow
+git clone https://github.com/dials/dials
+python installer/bootstrap.py --conda
+```
+
+Remember to restart your compute endpoint and add the values to the `ssx_client.py` script.
+
+```bash
+
+python ssx_client.py --datadir <data path>
+```
+
+
+### BraggNN flow
+
+The BraggNN flow uses the pyTorch for training the network, and requires the following dependencies
+for its compute endpoint:
+
+```bash
+#BRAGGNN flow
+conda install -c nvidia cudatoolkit
+conda install -c pytorch pytorch
+git clone https://github.com/lzhengchun/BraggNN.git
+```
+
+Remember to restart your compute endpoint and add the values to the `braggnn_client.py` script.
+
+```bash
+
+python bragnn_client.py --datadir <data path>
+```
