@@ -25,7 +25,7 @@ We describe in the following how to realize the common pattern using your own co
 
 The common pattern requires that three distinct endpoints be running:
 
-* On the **instrument**, a first Globus Connect endpoint (or "Collection" in Globus parlance), which we refer to here as *instrument-transfer*, so that files can be transferred *from* the instrument.
+* On the **instrument computer**, a first Globus Connect endpoint (or "Collection" in Globus parlance), which we refer to here as *instrument-transfer*, so that files can be transferred *from* the instrument.
 * On the **analysis computer**, a second Globus Connect endpoint (*analysis-transfer*), so that files can be transferred *to* the analysis computer.
 * Also on the  **analysis computer**, a funcX endpoint (*analysis-compute*), so that tasks can be sent to the analysis computer for execution. 
 
@@ -35,7 +35,7 @@ The client application is configured with the addresses of these three endpoints
 
 In a real deployment, the *instrument-transfer* endpoint will typically be a Globus Connect service running on a storage system at the instrument where data are being produced.
 
-To facilitate experimentation, we make test data available for the XPCS, SSX, BraggNN, and Ptychography applications at this [Globus endpoint](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F). Thus there is nothing for you to do to configure the instrument computer.
+To facilitate experimentation, we make test data available for the XPCS, SSX, BraggNN, and Ptychography applications at this [Globus endpoint](https://app.globus.org/file-manager?origin_id=a17d7fac-ce06-4ede-8318-ad8dc98edd69&origin_path=%2F~%2F). Thus there is nothing for you to do to configure the instrument computer for those applications.
 
 
 ### Configuring the analysis computer 
