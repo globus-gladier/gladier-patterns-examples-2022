@@ -187,6 +187,8 @@ Remember to restart your compute endpoint and add the values to the `ssx_client.
 python ssx_client.py --datadir <data path>
 ```
 
+For more information on how to install DIALS please visit [dials.github.io](dials.github.io)
+
 
 ### BraggNN flow
 
@@ -206,3 +208,11 @@ Remember to restart your compute endpoint and add the values to the `braggnn_cli
 
 python bragnn_client.py --datadir <data path>
 ```
+
+## Production Workflows
+
+The examples above are intended to be an introduction to the production clients.
+
+In special the examples above to not publish the results into a globus index and don't have an associated portal.
+
+Globus-Search and portals can be studied by following the tutorials. A good video tutorial can be found [here](https://www.youtube.com/watch?v=IEQtI8VVT3s&ab_channel=Globus)
