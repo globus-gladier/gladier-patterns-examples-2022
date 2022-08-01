@@ -5,7 +5,6 @@ def create_phil(**data):
     The Phil file uses a template set directly on the script and can be updated according to new options on dials
     - data['data_dir'] is the path where the raw (cbf) data is stored
     - data['proc_dir'] is the path to where dials will run and save results
-    - data['run_num'] set the beamline json being used for this particular phil
     Optional variables can be passed to overwrite the default values
     - data['unit_cell']
     - data['beamx']
@@ -19,13 +18,8 @@ def create_phil(**data):
     from string import Template
 
     data_dir = data['data_dir']
-    proc_dir = data['proc_dir']
-    run_num  = data['run_num']
-
-    if not os.path.exists(proc_dir):
-        os.makedirs(proc_dir)
         
-    phil_name = f"{proc_dir}/process_{run_num}.phil"
+    phil_name = f"{data_dir}/process.phil"
 
     if os.path.isfile(phil_name):
         return phil_name
@@ -38,8 +32,7 @@ def create_phil(**data):
     mask_file = data.get('mask', 'mask.pickle')
 
     ##opening existing files
-    beamline_json = os.path.join(data_dir,f"beamline_run{run_num}.json")
-    xy_json = os.path.join(data_dir,'xy.json')
+    beamline_json = os.path.join(data_dir,f"beamline_run.json")
     mask = os.path.join(data_dir,mask_file)
 
     beamline_data = None
@@ -56,15 +49,6 @@ def create_phil(**data):
         det_distance = float(beamline_data['beamline_input']['det_distance']) * -1.0
     except:
         pass
-
-    try:
-        with open(xy_json, 'r') as fp:
-            xy_data = json.loads(fp.read())
-        beamx = xy_data['beamx']
-        beamy = xy_data['beamy']
-    except:
-        pass
-
 
     template_data = {'det_distance': det_distance,
                      'unit_cell': unit_cell,
@@ -116,8 +100,6 @@ class CreatePhil(GladierBaseTool):
     flow_input = {}
     required_input = [
         'data_dir',
-        'proc_dir',
-        'run_num',
         'funcx_endpoint_non_compute',
     ]
     funcx_functions = [create_phil]

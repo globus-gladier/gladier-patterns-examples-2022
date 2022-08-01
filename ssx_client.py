@@ -15,7 +15,7 @@ class SSXFlow(GladierBaseClient):
     gladier_tools = [
         # "gladier_tools.globus.transfer.Transfer:FromStorage",
         CreatePhil,
-        "gladier_tools.posix.shell_cmd.ShellCmdTool:Stills",
+        # "gladier_tools.posix.shell_cmd.ShellCmdTool:Stills",
         # "gladier_tools.posix.shell_cmd.ShellCmdTool:PlotHist",
     ]
 
@@ -52,16 +52,16 @@ if __name__ == "__main__":
             "from_storage_transfer_source_endpoint_id": "a17d7fac-ce06-4ede-8318-ad8dc98edd69",
             "from_storage_transfer_source_path": "/SSX/data1",
             # TODO: Uncomment and add your Globus Collection here
-            "from_storage_transfer_destination_endpoint_id": "6d3275c0-e5d3-11ec-9bd1-2d2219dcc1fa",
+            # "from_storage_transfer_destination_endpoint_id": "6d3275c0-e5d3-11ec-9bd1-2d2219dcc1fa",
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
             # shell cmd inputs
-            "stills_args": f"",
-            "stills_cwd": f"source {dials_path}/dials_env.sh && dials.stills_process {data_dir}/info.phil {data_dir} > {data_dir}/log.txt",
+            "stills_args": f"source {dials_path}/dials_env.sh && dials.stills_process {data_dir}/process.phil {data_dir}",
+            "stills_cwd": f"{data_dir}_proc",
             "stills_timeout": 180,
             # shell cmd inputs
-            "plot_hist_args": f"",
-            "plot_hist_cwd": f"{data_dir}",
+            "plot_hist_args": f"source {dials_path}/dials_env.sh && dials.unit_cell_histogram {data_dir}_proc/*integrated.expt",
+            "plot_hist_cwd": f"{data_dir}_proc",
             "plot_hist_timeout": 180,
             # TODO: Uncomment and add your funcX endpoints here
             # "funcx_endpoint_non_compute": "",
