@@ -9,7 +9,6 @@ import os
 from gladier import GladierBaseClient, generate_flow_definition
 
 
-
 @generate_flow_definition()
 class BraggNNFlow(GladierBaseClient):
     gladier_tools = [
@@ -36,7 +35,20 @@ if __name__ == "__main__":
     run_label = "BraggNN DEMO: " + sample_name
 
     # TODO: Uncomment and add your funcX endpoints here
-    # braggnn_dir=''
+    # braggnn_dir="<path_to_braggnn_git_checkout>"
+
+    # Your Globus Transfer endpoint UUID where data processing will be done
+    # destination_endpoint_id = "<UUID Value>"
+
+    # Your FuncX endpoint UUID where the processing function can run. It must be
+    # able to access the data as stored on the Globus Transfer endpoint set by
+    # destination_endpoint_id
+    # funcx_endpoint_compute = "<UUID Value"
+
+    # Your FuncX endpoint UUID where the non-compute intensive processing will
+    # run. It also must be able to access the data as stored on the Globus
+    # Transfer endpoint set by destination_endpoint_id
+    # funcx_endpoint_non_compute = "<UUID Value"
 
     # Base input for the flow
     flow_input = {
@@ -47,18 +59,22 @@ if __name__ == "__main__":
             "proc_dir": data_dir,  # relative to funcx
             # REMOTE DEMO ENDPOINT FOR BragNN DATA
             "from_storage_transfer_source_endpoint_id": "a17d7fac-ce06-4ede-8318-ad8dc98edd69",
-            "from_storage_transfer_source_path": "/BRAGGNN/data",
-            # TODO: Uncomment and add your Globus Collection here
-            # "from_storage_transfer_destination_endpoint_id": "6d3275c0-e5d3-11ec-9bd1-2d2219dcc1fa",
+            "from_storage_transfer_source_path": "/BRAGGNN",
+            # Value from settings above
+            "from_storage_transfer_destination_endpoint_id": destination_endpoint_id,
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
             # shell cmd inputs
-            "args": f"python {braggnn_dir}/main.py -expName={sample_name} -maxep=20 -psz=11",
+            "args": (
+                "mkdir dataset && "
+                "tar xzf dataset.tar.gz --directory dataset && "
+                f"python {braggnn_dir}/main.py -expName={sample_name} -maxep=20 -psz=11"
+            ),
             "cwd": f"{data_dir}",
-            "timeout": 180,
-            # TODO: Uncomment and add your funcX endpoints here
-            # "funcx_endpoint_non_compute": "",
-            # "funcx_endpoint_compute": "",
+            "timeout": 1800,
+            # Values from settings above
+            "funcx_endpoint_non_compute": funcx_endpoint_non_compute,
+            "funcx_endpoint_compute": funcx_endpoint_compute,
         }
     }
 
