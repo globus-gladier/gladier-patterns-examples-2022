@@ -13,10 +13,10 @@ from tools.ssx_create_phil import CreatePhil
 @generate_flow_definition()
 class SSXFlow(GladierBaseClient):
     gladier_tools = [
-        # "gladier_tools.globus.transfer.Transfer:FromStorage",
-        CreatePhil,
-        # "gladier_tools.posix.shell_cmd.ShellCmdTool:Stills",
-        # "gladier_tools.posix.shell_cmd.ShellCmdTool:PlotHist",
+        "gladier_tools.globus.transfer.Transfer:FromStorage",
+        # CreatePhil,
+        "gladier_tools.posix.shell_cmd.ShellCmdTool:Stills",
+        "gladier_tools.posix.shell_cmd.ShellCmdTool:PlotHist",
     ]
 
 
@@ -38,7 +38,23 @@ if __name__ == "__main__":
     run_label = "DEMO SSX: " + sample_name
 
     # TODO: Uncomment and add your dials installation here
-    dials_path = '~/dials-v3-10-2'
+    dials_path = '~/dials/dials-v3-10-3'
+
+    # Your Globus Transfer endpoint UUID where data processing will be done
+    # destination_endpoint_id = "<UUID Value>"
+    destination_endpoint_id = "08925f04-569f-11e7-bef8-22000b9a448b"
+
+    # Your FuncX endpoint UUID where the processing function can run. It must be
+    # able to access the data as stored on the Globus Transfer endpoint set by
+    # destination_endpoint_id
+    # funcx_endpoint_compute = "<UUID Value"
+    funcx_endpoint_compute = "6951024f-06fb-4547-ade7-51e3515a5a05"
+
+    # Your FuncX endpoint UUID where the non-compute intensive processing will
+    # run. It also must be able to access the data as stored on the Globus
+    # Transfer endpoint set by destination_endpoint_id
+    # funcx_endpoint_non_compute = "<UUID Value"
+    funcx_endpoint_non_compute = "6951024f-06fb-4547-ade7-51e3515a5a05"
 
 
     # Base input for the flow
@@ -51,8 +67,8 @@ if __name__ == "__main__":
             # REMOTE DEMO ENDPOINT FOR SSX DATA
             "from_storage_transfer_source_endpoint_id": "a17d7fac-ce06-4ede-8318-ad8dc98edd69",
             "from_storage_transfer_source_path": "/SSX/data1",
-            # TODO: Uncomment and add your Globus Collection here
-            # "from_storage_transfer_destination_endpoint_id": "6d3275c0-e5d3-11ec-9bd1-2d2219dcc1fa",
+            # Value from settings above
+            "from_storage_transfer_destination_endpoint_id": destination_endpoint_id,
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
             # shell cmd inputs
@@ -63,9 +79,9 @@ if __name__ == "__main__":
             "plot_hist_args": f"source {dials_path}/dials_env.sh && dials.unit_cell_histogram {data_dir}_proc/*integrated.expt",
             "plot_hist_cwd": f"{data_dir}_proc",
             "plot_hist_timeout": 180,
-            # TODO: Uncomment and add your funcX endpoints here
-            # "funcx_endpoint_non_compute": "",
-            # "funcx_endpoint_compute": "",
+            # Values from settings above
+             "funcx_endpoint_non_compute": funcx_endpoint_non_compute,
+             "funcx_endpoint_compute": funcx_endpoint_compute,
         }
     }
 
