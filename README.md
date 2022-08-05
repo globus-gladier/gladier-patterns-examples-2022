@@ -5,9 +5,8 @@ The paper **Linking Scientific Instruments and Computation** describes five exam
 * [XPCS](https://github.com/globus-gladier/gladier-xpcs): X-ray Photon Correlation Spectroscopy application.
 * [SSX](https://github.com/globus-gladier/gladier-kanzus): Serial Synchrotron Crystallography application 
 * [HEDM](https://github.com/globus-gladier/gladier-hedm): High-energy Diffraction Microscopy
-* [BRAGGNN](https://github.com/lzhengchun/nnTrainFlow): Bragg
-* [PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-ptycho): Ptychography application.
-
+* [BraggNN](https://github.com/lzhengchun/nnTrainFlow): Bragg
+* [Ptychography](https://github.com/globus-gladier/gladier-ptycho): Ptychography application.
 
 The source code at those links has been developed to process big data streams from real light source instruments. To facilitate exploration, we also provide at the following links simple versions of each application that can be configured to run on a personal computer. For simplicity, these simplified applications do not deal with publishing flow products to a Globus Search catalog, and they do not have an associated portal.
 
@@ -20,7 +19,7 @@ The source code at those links has been developed to process big data streams fr
 
 ## The common pattern implemented by all five simplified applications
 
-Although each of the five simplified applications has a different structure and invokes a different set of tools, they all implement a common pattern, shown in the following figure. In each, a Gladier application (the **client**), running somewhere, makes a `Transfer` request to transfer data from an **instrument computer** to an **analysis computer** and then makes one or more `Compute` requests to the analysis computer to manipulate the data. Note the Globus collections (Globus terminology for a storage endpoint) on the analysis and instrument computers and the funcX endpoint on the analysis computer.
+Although each of the five simplified applications has a different structure and invokes a different set of tools, they all implement a common pattern, shown in the following figure. In each, a Gladier application (the **client**), running somewhere, creates a flow that makes a `Transfer` request to transfer data from an **instrument computer** to an **analysis computer** and then makes one or more `Compute` requests to the analysis computer to manipulate the data. Before running the flow, we have to make sure that two Globus collections (Globus terminology for a storage endpoint) on the analysis and instrument computers, and one funcX endpoint, on the analysis computer, are in place.
 
 <img src=Fig4Web.jpg width=800>
 
