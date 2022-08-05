@@ -5,7 +5,7 @@ The paper **Linking Scientific Instruments and Computation** describes five exam
 * [XPCS](https://github.com/globus-gladier/gladier-xpcs): X-ray Photon Correlation Spectroscopy application.
 * [SSX](https://github.com/globus-gladier/gladier-kanzus): Serial Synchrotron Crystallography application 
 * [HEDM](https://github.com/globus-gladier/gladier-hedm): High-energy Diffraction Microscopy
-* [BraggNN](https://github.com/lzhengchun/nnTrainFlow): Bragg
+* [BraggNN](https://github.com/lzhengchun/nnTrainFlow): Bragg peak detection application
 * [Ptychography](https://github.com/globus-gladier/gladier-ptycho): Ptychography application.
 
 The source code at those links has been developed to process big data streams from real light source instruments. To facilitate exploration, we also provide at the following links simple versions of each application that can be configured to run on a personal computer. For simplicity, these simplified applications do not deal with publishing flow products to a Globus Search catalog, and they do not have an associated portal.
