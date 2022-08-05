@@ -36,9 +36,20 @@ if __name__ == "__main__":
     sample_name = args.samplename
     data_dir = os.path.join(args.datadir, sample_name)
     run_label = "DEMO SSX: " + sample_name
+    
+    # The predefined Globus collection UUID for test data
+    instrument_computer_collection_id = "a17d7fac-ce06-4ede-8318-ad8dc98edd69"
 
-    # TODO: Uncomment and add your dials installation here
+    # TODO: Set the following values for your environment
+    # A) Your DIALS installation path:
     dials_path = '~/dials-v3-10-2'
+    
+    # B) The Globus collection UUID on the computer where data processing will be done
+    analysis_computer_collection_id = "<UUID Value>"
+
+    # C) Your FuncX endpoint UUID where the processing function can run. It must be
+    # able to access the data as stored on the Globus collection identified by analysis_computer_collection_id
+    analysis_computer_funcx_id = "<UUID Value>"
 
 
     # Base input for the flow
@@ -48,24 +59,26 @@ if __name__ == "__main__":
             "sample_name": sample_name,
             "data_dir": data_dir,  # relative to endpoint
             "proc_dir": data_dir,  # relative to funcx
-            # REMOTE DEMO ENDPOINT FOR SSX DATA
-            "from_storage_transfer_source_endpoint_id": "a17d7fac-ce06-4ede-8318-ad8dc98edd69",
+            
+            # Source location for SSX data
+            "from_storage_transfer_source_endpoint_id": instrument_computer_collection_id,
             "from_storage_transfer_source_path": "/SSX/data1",
-            # TODO: Uncomment and add your Globus Collection here
-            # "from_storage_transfer_destination_endpoint_id": "6d3275c0-e5d3-11ec-9bd1-2d2219dcc1fa",
+            
+            "from_storage_transfer_destination_endpoint_id": analysis_computer_collection_id,
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
+            
             # shell cmd inputs
             "stills_args": f"source {dials_path}/dials_env.sh && dials.stills_process {data_dir}/process.phil {data_dir}",
             "stills_cwd": f"{data_dir}_proc",
             "stills_timeout": 180,
+            
             # shell cmd inputs
             "plot_hist_args": f"source {dials_path}/dials_env.sh && dials.unit_cell_histogram {data_dir}_proc/*integrated.expt",
             "plot_hist_cwd": f"{data_dir}_proc",
+            
             "plot_hist_timeout": 180,
-            # TODO: Uncomment and add your funcX endpoints here
-            # "funcx_endpoint_non_compute": "",
-            # "funcx_endpoint_compute": "",
+            "funcx_endpoint_compute": analysis_computer_funcx_id,
         }
     }
 
