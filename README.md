@@ -98,7 +98,7 @@ if you wish:
 pip install gladier gladier-tools
 ```
 
-Test your basic setup by running the test_client.py:
+Test your basic setup by running the `test_client.py` script:
 
 ```bash
 
@@ -216,8 +216,3 @@ python bragnn_client.py --datadir <data path>
 ### Running the simplified HEDM application
 
 The simplified HEDM application will be available soon.
-
-## Production Workflows
-
-
-Globus Search and portals can be studied by following the tutorials. A good video tutorial can be found [here](https://www.youtube.com/watch?v=IEQtI8VVT3s&ab_channel=Globus)
