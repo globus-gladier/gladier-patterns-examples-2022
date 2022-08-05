@@ -13,10 +13,10 @@ from tools.ssx_create_phil import CreatePhil
 @generate_flow_definition()
 class SSXFlow(GladierBaseClient):
     gladier_tools = [
-        # "gladier_tools.globus.transfer.Transfer:FromStorage",
+        "gladier_tools.globus.transfer.Transfer:FromStorage",
         CreatePhil,
-        # "gladier_tools.posix.shell_cmd.ShellCmdTool:Stills",
-        # "gladier_tools.posix.shell_cmd.ShellCmdTool:PlotHist",
+        "gladier_tools.posix.shell_cmd.ShellCmdTool:Stills",
+        "gladier_tools.posix.shell_cmd.ShellCmdTool:PlotHist",
     ]
 
 
@@ -41,6 +41,7 @@ if __name__ == "__main__":
     instrument_computer_collection_id = "a17d7fac-ce06-4ede-8318-ad8dc98edd69"
 
     # TODO: Set the following values for your environment
+    
     # A) Your DIALS installation path:
     dials_path = '~/dials-v3-10-2'
     
