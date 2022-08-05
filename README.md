@@ -15,8 +15,8 @@ The source code at those links has been developed to process big data streams fr
 * [simple-XPCS](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_xpcs_client.py): Simplified X-ray Photon Correlation Spectroscopy application
 * [simple-SSX](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_ssx_client.py): Simplified Serial Synchrotron Crystallography application
 * [simple-HEDM](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_hedm_client.py): Simplified High-energy Diffraction Microscopy application
-* [simple-BRAGGNN](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_braggnn_client.py): Simplified neural-network-based Bragg peak detection application
-* [simple-PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_ptycho_client.py): Simplified ptychography application
+* [simple-BraggNN](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_braggnn_client.py): Simplified neural-network-based Bragg peak detection application
+* [simple-Pytcho](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_ptycho_client.py): Simplified ptychography application
 
 
 We also provide below information on how to set up to run these applications.
