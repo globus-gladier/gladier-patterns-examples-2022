@@ -1,12 +1,23 @@
 # Gladier Application Examples
 
-The paper **Linking Scientific Instruments and Computation** describes five example Gladier applications. We provide code pointers and information on how to run simple versions of each application at the following links:
+The paper **Linking Scientific Instruments and Computation** describes five example Gladier applications, for each of which source code, plus information on how to install and run that source code, are available online:
 
-* [XPCS](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/xpcs_client.py): X-ray Photon Correlation Spectroscopy application.
-* [SSX](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/ssx_client.py): Serial Synchrotron Crystallography application 
-* [HEDM](): High-energy Diffraction Microscopy
-* [BRAGGNN](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/braggnn_client.py): Bragg
-* [PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/ptychodus_client.py): Ptychography application.
+* [XPCS](https://github.com/globus-gladier/gladier-xpcs): X-ray Photon Correlation Spectroscopy application.
+* [SSX](https://github.com/globus-gladier/gladier-kanzus): Serial Synchrotron Crystallography application 
+* [HEDM](https://github.com/globus-gladier/gladier-hedm): High-energy Diffraction Microscopy
+* [BRAGGNN](https://github.com/lzhengchun/nnTrainFlow): Bragg
+* [PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-ptycho): Ptychography application.
+
+
+The source code at those links has been developed to process big data streams from real light source instruments. To facilitate exploration, we also provide at the following links simple versions of each application that can be configured to run on a personal computer.
+
+
+* [simple-XPCS](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_xpcs_client.py): Simplified X-ray Photon Correlation Spectroscopy application
+* [simple-SSX](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_ssx_client.py): Simplified Serial Synchrotron Crystallography application
+* [simple-HEDM](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_hedm_client.py): Simplified High-energy Diffraction Microscopy application
+* [simple-BRAGGNN](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_braggnn_client.py): Simplified neural-network-based Bragg peak detection application
+* [simple-PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_ptycho_client.py): Simplified ptychography application
+
 
 We also provide below information on how to set up to run these applications.
 
