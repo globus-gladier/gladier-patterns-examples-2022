@@ -54,22 +54,17 @@ def main():
     output_dir = os.path.join(dataset_dir, "output")
     # This tells the corr state where to place version specific info
     execution_metadata_file = os.path.join(dataset_dir, "execution_metadata.json")
+    
+    instrument_computer_collection_id = "a17d7fac-ce06-4ede-8318-ad8dc98edd69"
 
     # TODO: Set the following values for your environment
 
-    # Your Globus Transfer endpoint UUID where data processing will be done
-    # destination_endpoint_id = "<UUID Value>"
+    # The Globus collection UUID on the computer where data processing will be done
+    analysis_computer_collection_id = "<UUID Value>"
 
     # Your FuncX endpoint UUID where the processing function can run. It must be
-    # able to access the data as stored on the Globus Transfer endpoint set by
-    # destination_endpoint_id
-    # funcx_endpoint_compute = "<UUID Value>"
-
-    # Your FuncX endpoint UUID where the non-compute intensive processing will
-    # run. It also must be able to access the data as stored on the Globus
-    # Transfer endpoint set by destination_endpoint_id
-    # funcx_endpoint_non_compute = "<UUID Value>"
-
+    # able to access the data as stored on the Globus collection identified by analysis_computer_collection_id
+    analysis_computer_funcx_id = "<UUID Value>"
 
 
 
@@ -80,16 +75,15 @@ def main():
             "data_dir": data_dir,  # relative to endpoint
             "proc_dir": data_dir,  # relative to funcx
             # REMOTE DEMO ENDPOINT FOR PTYCHO DATA
-            "from_storage_transfer_source_endpoint_id": "a17d7fac-ce06-4ede-8318-ad8dc98edd69",
+            "from_storage_transfer_source_endpoint_id": instrument_computer_collection_id,
             "from_storage_transfer_source_path": "/XPCS/A001_Aerogel_1mm_att6_Lq0_001_0001-1000/",
-            "from_storage_transfer_destination_endpoint_id": destination_endpoint_id,
+            "from_storage_transfer_destination_endpoint_id": analysis_computer_collection_id,
             "from_storage_transfer_destination_path": str(data_dir),
             "from_storage_transfer_recursive": True,
             "metadata_file": input_hdf_file,
             "hdf_file": output_hdf_file,
             "execution_metadata_file": execution_metadata_file,
-            "funcx_endpoint_non_compute": funcx_endpoint_non_compute,
-            "funcx_endpoint_compute": funcx_endpoint_compute,
+            "funcx_endpoint_compute": analysis_computer_funcx_id,
             "boost_corr": {
                 "atype": "TwoTime",
                 "qmap": qmap_file,
@@ -111,7 +105,7 @@ def main():
 
     corr_flow = XPCSBoost()
     run = corr_flow.run_flow(
-        flow_input=flow_input, label=run_label, tags=["gladier", "demo", "xpcs"]
+        flow_input=flow_input, label=run_label, tags=["gladier", "demo", "simple_xpcs"]
     )
 
     print(
