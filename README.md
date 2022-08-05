@@ -192,7 +192,7 @@ For more information on how to install DIALS please visit [dials.github.io](dial
 
 ### BraggNN flow
 
-The BraggNN flow uses the pyTorch for training the network, and requires the following dependencies
+The BraggNN flow uses pyTorch for training the network, and requires the following dependencies
 for its compute endpoint:
 
 ```bash
@@ -211,8 +211,7 @@ python bragnn_client.py --datadir <data path>
 
 ## Production Workflows
 
-The examples above are intended to be an introduction to the production clients.
-
-In special the examples above to not publish the results into a globus index and don't have an associated portal.
+The simplfied examples described above are intended to be an introduction to the production clients.
+In particular, they not publish the results into a Globus catalog, and do not have an associated portal.
 
 Globus-Search and portals can be studied by following the tutorials. A good video tutorial can be found [here](https://www.youtube.com/watch?v=IEQtI8VVT3s&ab_channel=Globus)
