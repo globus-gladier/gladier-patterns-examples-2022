@@ -9,8 +9,7 @@ The paper **Linking Scientific Instruments and Computation** describes five exam
 * [PTYCHOGRAPHY](https://github.com/globus-gladier/gladier-ptycho): Ptychography application.
 
 
-The source code at those links has been developed to process big data streams from real light source instruments. To facilitate exploration, we also provide at the following links simple versions of each application that can be configured to run on a personal computer.
-
+The source code at those links has been developed to process big data streams from real light source instruments. To facilitate exploration, we also provide at the following links simple versions of each application that can be configured to run on a personal computer. For simplicity, these simplified applications do not deal with publishing flow products to a Globus Search catalog, and they do not have an associated portal.
 
 * [simple-XPCS](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_xpcs_client.py): Simplified X-ray Photon Correlation Spectroscopy application
 * [simple-SSX](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_ssx_client.py): Simplified Serial Synchrotron Crystallography application
@@ -19,16 +18,11 @@ The source code at those links has been developed to process big data streams fr
 * [simple-Pytcho](https://github.com/globus-gladier/gladier-patterns-examples-2022/blob/main/simple_ptycho_client.py): Simplified ptychography application
 
 
-We also provide below information on how to set up to run these applications.
+## The common pattern implemented by all five simplified applications
 
-
-## The common pattern implemented by all five applications
-
-Although each of the five applications has its own particular set of tools, they all implement a common pattern, shown in the following figure, in which the a Gladier application (the **client**), running somewhere, makes a `Transfer` request to transfer data from an **instrument computer** to an **analysis computer** and then makes one or more `Compute` requests to the analysis computer to manipulate the data. Note the Globus collections (Globus terminology for a storage endpoint) on the analysis and instrument computers and the funcX endpoint on the analysis computer.
+Although each of the five simplified applications has a different structure and invokes a different set of tools, they all implement a common pattern, shown in the following figure. In each, a Gladier application (the **client**), running somewhere, makes a `Transfer` request to transfer data from an **instrument computer** to an **analysis computer** and then makes one or more `Compute` requests to the analysis computer to manipulate the data. Note the Globus collections (Globus terminology for a storage endpoint) on the analysis and instrument computers and the funcX endpoint on the analysis computer.
 
 <img src=Fig4Web.jpg width=800>
-
-Of course, many Gladier applications (including the production applications described in the paper) are more complex than that, but this pattern captures important concepts.
 
 We describe in the following how to realize the common pattern using your own computer as the analysis computer.
 
@@ -127,9 +121,9 @@ The flow completed with the status: SUCCEEDED
 Output: [0, 'Success! You environment has been setup correctly!\n', '']
 ```
 
-Now you're ready to run the other science flows.
+Now you're ready to run the other simplified applications.
 
-### Ptychography
+### Running the simplified Ptychography application
 
 The ptychography flow uses a shell command tool to execute the `ptychodus` tool on the example data.
 
@@ -158,9 +152,9 @@ the values in the script.
 python ptychodus_client.py --datadir <data path>
 ```
 
-### XPCS flow
+### Running the simplified XPCS application
 
-The XPCS flow uses the boost_corr Python SDK for execution, and requires the following dependencies
+The XPCS application uses the boost_corr Python SDK for execution, and requires the following dependencies
 for its compute endpoint:
 
 ```bash
@@ -179,9 +173,9 @@ python xpcs_client.py --datadir <data path>
 ```
 
 
-### SSX flow
+### Running the simplified SSX application
 
-The SSX flow uses the [DIALS Package][https://dials.github.io/], and requires the following dependencies
+The simplified SSX application uses the [DIALS Package](https://dials.github.io/), and requires the following dependencies
 for its compute endpoint:
 
 ```bash
@@ -201,9 +195,9 @@ python ssx_client.py --datadir <data path>
 For more information on how to install DIALS please visit [dials.github.io](dials.github.io)
 
 
-### BraggNN flow
+### Running the simplified BraggNN application
 
-The BraggNN flow uses pyTorch for training the network, and requires the following dependencies
+The simplfied BraggNN application uses pyTorch for training the network, and requires the following dependencies
 for its compute endpoint:
 
 ```bash
@@ -220,9 +214,11 @@ Remember to restart your compute endpoint and add the values to the `braggnn_cli
 python bragnn_client.py --datadir <data path>
 ```
 
+### Running the simplified HEDM application
+
+The simplified HEDM application will be available soon.
+
 ## Production Workflows
 
-The simplfied examples described above are intended to be an introduction to the production clients.
-In particular, they not publish the results into a Globus catalog, and do not have an associated portal.
 
-Globus-Search and portals can be studied by following the tutorials. A good video tutorial can be found [here](https://www.youtube.com/watch?v=IEQtI8VVT3s&ab_channel=Globus)
+Globus Search and portals can be studied by following the tutorials. A good video tutorial can be found [here](https://www.youtube.com/watch?v=IEQtI8VVT3s&ab_channel=Globus)
